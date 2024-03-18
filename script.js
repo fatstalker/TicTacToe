@@ -1,57 +1,59 @@
 (function master () {
 
-let firstPlayersSelctedCells = [];
-let secondPlayersSelectedCells = [];
-let cellsObject = {};
-let currentTurn = firstPlayersSelctedCells;
+    let assets = {
+        firstPlayersSelctedCells : [],
+        secondPlayersSelectedCells : [],
+        cellsObject : {},
+        currentTurn : this.firstPlayersSelctedCells,
+        winningCombinations : {
+            1 : [1, 2, 3],
+            2 : [4, 5, 6],
+            3 : [7, 8, 9],
+            //vertical
+            4 : [1, 4, 7],
+            5 : [2, 5, 8],
+            6 : [3, 6, 9],
+            //diagonal
+            7 : [1, 5, 9],
+            8 : [3, 5, 7],
+        },
+    };
+    (function initializeCurrentTurnProperty () {
+        assets.currentTurn = assets.firstPlayersSelctedCells
+    }) ();
 
-(function populateCellsObject(){
+  
+
+(function populateCellsObject (){
     cellsArray = Array.from(document.querySelectorAll('.cells'));
     for (let i = 0; i < cellsArray.length; i++) {
-        cellsObject[i+1] = {domElement : cellsArray[i], isAlreadyClicked : false};
-        cellsArray[i].addEventListener('click', function() {clickCellEvent(i, currentTurn)});
+        assets.cellsObject[i+1] = {domElement : cellsArray[i], isAlreadyClicked : false};
+        cellsArray[i].addEventListener('click', function() {clickCellEvent(i, assets.currentTurn)});
     }
-    return cellsObject
     })  ();
 
 
     function clickCellEvent (i, currentTurn) {
-        if (cellsObject[i+1].isAlreadyClicked === true) {
+        if (assets.cellsObject[i+1].isAlreadyClicked === true) {
             alert('invalid selection')
         }
         else {
-
-            cellsObject[i+1].isAlreadyClicked = true;
-            currentTurn.push(i+1);
-            checkWinningConditions(currentTurn, winningCombinations);
+            assets.cellsObject[i+1].isAlreadyClicked = true; currentTurn.push(i+1);//populate player's array
+            checkWinningConditions(currentTurn, assets.winningCombinations);
             switchTurn();
-            console.log(firstPlayersSelctedCells)
-            console.log(secondPlayersSelectedCells)
+            console.log(assets.firstPlayersSelctedCells)                           //to be removed
+            console.log(assets.secondPlayersSelectedCells)                         //to be removed
         }
-    }
-    console.log(cellsObject)
-    
+    };
 
-const winningCombinations = {
-    //orizontal
-    1 : [1, 2, 3],
-    2 : [4, 5, 6],
-    3 : [7, 8, 9],
-    //vertical
-    4 : [1, 4, 7],
-    5 : [2, 5, 8],
-    6 : [3, 6, 9],
-    //diagonal
-    7 : [1, 5, 9],
-    8 : [3, 5, 7],
-}
+
 
 function switchTurn () {
-    if (currentTurn === firstPlayersSelctedCells) {
-        currentTurn = secondPlayersSelectedCells
+    if (assets.currentTurn === assets.firstPlayersSelctedCells) {
+        assets.currentTurn = assets.secondPlayersSelectedCells
     }
     else {
-        currentTurn = firstPlayersSelctedCells
+        assets.currentTurn = assets.firstPlayersSelctedCells
     }
 };
 
@@ -59,14 +61,14 @@ function switchTurn () {
 function resetMatch () {
     (function setclickedStatutToFalse () {
         for (let i = 1; i < 10; i++) {
-        cellsObject[i].isAlreadyClicked = false
+        assets.cellsObject[i].isAlreadyClicked = false
         }
     }) ();
     (function resetPlayersArrays () {
-        firstPlayersSelctedCells = [];
-        secondPlayersSelectedCells = [];
+        assets.firstPlayersSelctedCells = [];
+        assets.secondPlayersSelectedCells = [];
     }) ();
-}
+};
 
 
 function checkWinningConditions(playerArray, winningCombinations) {
@@ -84,7 +86,7 @@ function checkWinningConditions(playerArray, winningCombinations) {
             }
         }
     }
-}
+};
 
 
 

@@ -1,9 +1,23 @@
+@import url('https://fonts.cdnfonts.com/css/cartoon-free');
 
 body {
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     height: 98vh;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 300%;
+}
+
+.scoreBoard {
+    display: flex;
+    justify-content: space-around;
+    font-size: 200%;
 }
 
 .gameBoard {
@@ -12,8 +26,15 @@ body {
     grid-template-rows: 150px 150px 150px;
 }
 .cells {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: solid black 2px;
+    font-family: 'CARTOON FREE', sans-serif;
+    font-size: 100px;
+    color: brown;
 }
 .cells:hover {
     background-color: rgb(171, 242, 218);
 }
+

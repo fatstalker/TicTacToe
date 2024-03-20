@@ -6,21 +6,40 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <header>Tic Tac Toe</header>
-        <div class="scoreBoard">
-            <div id="firstPlayer">primo</div>
-            <div id="secondPlayer">secondo</div>
+        <div class="leftSide">
+            <input type="text" id="leftInput">
+            <button id="leftButton">Update your name</button>
         </div>
-        <div class="gameBoard">
-            <div class="cells"></div>
-            <div class="cells"></div>
-            <div class="cells"></div>
-            <div class="cells"></div>
-            <div class="cells"></div>
-            <div class="cells"></div>
-            <div class="cells"></div>
-            <div class="cells"></div>
-            <div class="cells"></div>
+        <div class="centerSide">
+            <header>Tic Tac Toe</header>
+            <h1 style="display: flex; justify-content: center;">Scoreboard</h1>
+
+            <div class="scoreBoard">
+                <div>
+                    <div id="firstPlayer">Player One</div>
+                        <div class="playerSimbol">X</div>
+                </div>
+
+                <div>
+                    <div id="secondPlayer">Player Two</div>
+                        <div class="playerSimbol">O</div>
+                </div>
+            </div>
+            <div class="gameBoard">
+                <div class="cells"></div>
+                <div class="cells"></div>
+                <div class="cells"></div>
+                <div class="cells"></div>
+                <div class="cells"></div>
+                <div class="cells"></div>
+                <div class="cells"></div>
+                <div class="cells"></div>
+                <div class="cells"></div>
+            </div>
+        </div>
+        <div class="rightSide">
+            <input type="text" id="rightInput">
+            <button id="rightButton">Update your name</button>
         </div>
     </body>
 </html>

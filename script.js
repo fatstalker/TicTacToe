@@ -8,6 +8,12 @@ function singleMatch () {
     let assets = {
         firstPlayersSelectedCells : [],
         secondPlayersSelectedCells : [],
+        firstPlayerScoreBoard : document.querySelector('#firstPlayer'),
+        secondPlayerScoreBoard : document.querySelector('#secondPlayer'),
+        leftInput : document.querySelector('#leftInput'),
+        rightInput : document.querySelector('#rightInput'),
+        leftButton : document.querySelector('#leftButton'),
+        rightButton : document.querySelector('#rightButton'),
         cellsObject : {},
         cellsArray : Array.from(document.querySelectorAll('.cells')),
         winningCombinations : {
@@ -26,7 +32,7 @@ function singleMatch () {
     (function initializeCurrentTurnProperty () {
         assets.currentTurn = assets.firstPlayersSelectedCells
     }) ();
-    //-------------------- should I keep this in the single match scope?
+    //-------------------- should I keep this in the single match scope? 
 
 
     let render = {
@@ -43,8 +49,17 @@ function singleMatch () {
                 assets.cellsArray[i].textContent = '';
             }
         },
-
+        scoreBoard : {
+            firstPlayer : () => {assets.firstPlayerScoreBoard.textContent = players[0].name + ': '+ players[0].score},
+            secondPlayer : () => {assets.secondPlayerScoreBoard.textContent = players[1].name + ': '+players[1].score},
+        },
+        inputNames : {
+            leftName : (function () {assets.leftButton.addEventListener('click', function() {players[0].name = assets.leftInput.value, assets.firstPlayerScoreBoard.textContent = assets.leftInput.value + ': '+ players[0].score })}) (),
+            rightName : (function () {assets.rightButton.addEventListener('click', function() {players[1].name = assets.rightInput.value, assets.secondPlayerScoreBoard.textContent = assets.rightInput.value + ': '+ players[1].score })}) (),
+        }
     };
+
+    render.scoreBoard.firstPlayer();render.scoreBoard.secondPlayer();
 
     (function populateCellsObject (){
         for (let i = 0; i < assets.cellsArray.length; i++) {
@@ -93,6 +108,7 @@ function singleMatch () {
         }) ();
         setTimeout(function() {
             render.clearSimbolsOnGameboard();
+            render.scoreBoard.firstPlayer();render.scoreBoard.secondPlayer();
         }, 10);
     };
 
@@ -162,19 +178,18 @@ function singleMatch () {
             players[1].score = 0;players[0].score = 0;
         }
     };
+    
 };
 
 let players =[];
 (function gameFlow () {
 
     (function playerInitializer() {
-        function playerConstructor (previousPlayer) {
-            
+        let x = document.querySelector('#firstPlayer').textContent;//togliere
+        let y = document.querySelector('#secondPlayer').textContent;//togliere
+        function playerConstructor (x) {
             let name = (() => {
-                if (players[0] && players[1]) {
-                return prompt('What is your name?', previousPlayer)
-                }
-                else {return prompt('What is your name?', 'Mario')};
+                return x
             }) (players);
             let player = {
                 name : name,
@@ -182,10 +197,11 @@ let players =[];
             };
             players.push(player);
         };
-        playerConstructor(players[0]);playerConstructor(players[1]);
+        playerConstructor(x);playerConstructor(y);
         console.log(players)
     }) ();
 
+    
 
     
     
